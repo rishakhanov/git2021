@@ -24,6 +24,9 @@ public class ServiceFactory {
         SERVICE_MAP.put("/KIDSSHOP/CONSTRUCTORSSHOW", new ShowConstructorsService());
         SERVICE_MAP.put("/KIDSSHOP/STUFFEDTOYSSHOW", new ShowStuffedToysService());
         SERVICE_MAP.put("/KIDSSHOP/BUYCAR", new BuyCarService());
+        SERVICE_MAP.put("/KIDSSHOP/HOMEPAGESHOW", new ShowHomePageService());
+        SERVICE_MAP.put("/KIDSSHOP/CARTSHOW", new ShowCartService());
+        SERVICE_MAP.put("/KIDSSHOP/DELETEORDERITEM", new DeleteOrderItemService());
     }
 
     public Service getService(String request) {

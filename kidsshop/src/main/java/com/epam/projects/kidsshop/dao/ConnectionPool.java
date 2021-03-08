@@ -1,6 +1,5 @@
 package com.epam.projects.kidsshop.dao;
 
-import javax.sql.PooledConnection;
 import java.sql.*;
 import java.util.Locale;
 import java.util.Map;
@@ -17,6 +16,7 @@ public class ConnectionPool {
     private String user;
     private String password;
     private int poolSize;
+    private static boolean existConnectionQueue = false;
 
     private ConnectionPool() {
         DBResourceManager dbResourceManager = DBResourceManager.getInstance();
@@ -41,8 +41,10 @@ public class ConnectionPool {
                 }
             }
         }
-        localInstance.initPoolData();
 
+        if (!existConnectionQueue) {
+            localInstance.initPoolData();
+        }
         return localInstance;
     }
 
@@ -57,6 +59,7 @@ public class ConnectionPool {
                 PooledConnection pooledConnection = new PooledConnection(connection);
                 connectionQueue.add(pooledConnection);
             }
+            existConnectionQueue = true;
         } catch (SQLException e) {
             throw new ConnectionPoolException("SQLException in ConnectionPool", e);
         } catch (ClassNotFoundException e) {
@@ -74,32 +77,20 @@ public class ConnectionPool {
         return connection;
     }
 
-    public void closeConnection(Connection con, Statement st, ResultSet rs) {
-        try {
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public synchronized void putback(Connection connection) throws NullPointerException {
+        if (connection != null) {
+            connectionQueue.add(connection);
+        } else {
+            throw new NullPointerException("Connection not in the connectionQueue");
         }
     }
 
-    private class PooledConnection implements Connection {
+    private static class PooledConnection implements Connection {
         private Connection connection;
 
         public PooledConnection(Connection c) throws SQLException {
             this.connection = c;
-            this.connection.setAutoCommit(true);
         }
 
         @Override
@@ -372,6 +363,5 @@ public class ConnectionPool {
             return false;
         }
     }
-
 
 }

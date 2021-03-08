@@ -2,22 +2,18 @@ package com.epam.projects.kidsshop.service;
 
 import com.epam.projects.kidsshop.dao.AddProductDao;
 import com.epam.projects.kidsshop.entity.Product;
-import javafx.util.converter.BigDecimalStringConverter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.text.ParseException;
 
 public class AddProductService implements Service {
-    AddProductDao productDao = new AddProductDao();
+    private final AddProductDao productDao = new AddProductDao();
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = new Product();
         product.setName(request.getParameter("productName"));
         product.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));

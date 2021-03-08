@@ -1,6 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+
+<c:set var="current" value="${param.ddlLanguage}" scope="session"/>
+<c:if test="${not empty current}">
+    <fmt:setLocale value="${current}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="myResource" scope="session"/>
+
 <html>
     <head>
         <meta charset="UTF-8"/>
@@ -11,19 +20,18 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <title>KidsShop</title>
     </head>
-    <!--<body style="height: 6000px">-->
-    <body>
 
+    <body>
+    <c:set var="user" scope="application"><%=request.getAttribute("userEmail") %></c:set>
     <!--Navigation bar-->
         <div id="nav-placeholder">
 
+            <<script>
+                $(function(){
+                    $("#nav-placeholder").load("navbar.jsp");
+                });
+            </script>
         </div>
-
-        <<script>
-            $(function(){
-                $("#nav-placeholder").load("navbar.jsp");
-            });
-        </script>
         <!--end of Navigation bar-->
 
     <!-- Modal -->
@@ -52,7 +60,6 @@
             <div class="row">
                 <div class="mx-auto" style="width: 200px">
                     <h5>KidsToys</h5>
-                    ${user}
                 </div>
             </div>
         </footer>

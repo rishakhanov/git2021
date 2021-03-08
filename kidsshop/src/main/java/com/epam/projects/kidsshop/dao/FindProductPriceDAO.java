@@ -1,27 +1,29 @@
 package com.epam.projects.kidsshop.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class FindUserDao {
+public class FindProductPriceDAO {
 
-    private final String SQL = "select * from userdetail";
+    private final String SQL = "select * from product";
 
-    public int findUser(String email) {
-        int result = 0;
-        String emailDB = "";
+    public BigDecimal findProductPrice(int productId) {
+        BigDecimal result = null;
+        int userLoginId = productId;
+        int productIdDB = 0;
 
         try {
             Class.forName("org.postgresql.Driver");
             ConnectionPool connectionPool = ConnectionPool.getInstance();
-            try(Connection con = connectionPool.takeConnection(); Statement st = con.createStatement()) {
+            try (Connection con = connectionPool.takeConnection(); Statement st = con.createStatement()) {
                 try (ResultSet rs = st.executeQuery(SQL)) {
                     while (rs.next()) {
-                        emailDB = rs.getString(7);
-                        if (email.equals(emailDB)) {
-                            result =  rs.getInt(1);
+                        productIdDB = rs.getInt(1);
+                        if (userLoginId == productIdDB) {
+                            result = rs.getBigDecimal(6);
                         }
                     }
                 }

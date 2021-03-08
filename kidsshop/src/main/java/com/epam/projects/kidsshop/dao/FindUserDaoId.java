@@ -6,51 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class FindUserDaoId {
+
+    private final String SQL = "select * from orderdetail order by id asc";
+
     public int findUserId(int userId) {
-
-        int userLoginId = userId;
-
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-
+        int result = 0;
         int userIdDB = 0;
 
         try {
             Class.forName("org.postgresql.Driver");
             ConnectionPool connectionPool = ConnectionPool.getInstance();
-            con = connectionPool.takeConnection();
-            st = con.createStatement();
-            rs = st.executeQuery("select * from orderdetail");
-            while (rs.next()) {
-                userIdDB = rs.getInt(2);
-
-                if(userLoginId == userIdDB) {
-                    return rs.getInt(1);
+            try (Connection con = connectionPool.takeConnection(); Statement st = con.createStatement()) {
+                try (ResultSet rs = st.executeQuery(SQL)) {
+                    while (rs.next()) {
+                        userIdDB = rs.getInt(2);
+                        if (userId == userIdDB) {
+                            result = rs.getInt(1);
+                        }
+                    }
                 }
+                connectionPool.putback(con);
             }
-        }catch (ClassNotFoundException e) {
+        }catch (ClassNotFoundException | SQLException | ConnectionPoolException e) {
             e.printStackTrace();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ConnectionPoolException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
-        return 0;
+        return result;
     }
 }

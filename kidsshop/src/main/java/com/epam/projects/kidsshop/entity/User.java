@@ -1,6 +1,5 @@
 package com.epam.projects.kidsshop.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,8 +9,8 @@ public class User {
     private String firstName;
     private String lastName;
     private LocalDate birthday;
-    private String iin;
-    private String phone;
+    private long iin;
+    private long phone;
     private String email;
     private String address;
     private String details;
@@ -51,19 +50,19 @@ public class User {
         this.birthday = birthday;
     }
 
-    public String getIin() {
+    public long getIin() {
         return iin;
     }
 
-    public void setIin(String iin) {
+    public void setIin(long iin) {
         this.iin = iin;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -121,12 +120,12 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
+                iin == user.iin &&
+                phone == user.phone &&
                 adminPermission == user.adminPermission &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(birthday, user.birthday) &&
-                Objects.equals(iin, user.iin) &&
-                Objects.equals(phone, user.phone) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(address, user.address) &&
                 Objects.equals(details, user.details) &&
@@ -146,8 +145,8 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthday=" + birthday +
-                ", iin='" + iin + '\'' +
-                ", phone='" + phone + '\'' +
+                ", iin=" + iin +
+                ", phone=" + phone +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", details='" + details + '\'' +

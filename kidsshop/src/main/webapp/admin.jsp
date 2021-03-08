@@ -13,15 +13,11 @@
         <title>Admin</title>
     </head>
     <body>
+
         <h2>Admin service</h2>
 
-        Welcome <%=request.getAttribute("userEmail") %>
-
-
             <form method="post" action="logout">
-               <!-- <div class="modal-footer">-->
-                    <input type="submit" class="btn btn-secondary" value="Logout"/>
-              <!--  </div>-->
+                <input type="submit" class="btn btn-secondary" value="Logout"/>
             </form>
 
 
@@ -32,7 +28,7 @@
         </div>
         <br><br>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!--<div class="container">-->
+
                 <form method="post" action="productsshow">
                     <input type="submit" class="add-product-button" value="Show products"/>
                 </form>
@@ -40,7 +36,6 @@
                     <button class="add-product-button ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add product</button>
                     <button class="add-product-button ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalUpdate">Update product</button>
 
-            <!--</div>-->
         </nav>
 
         <div id="container">
@@ -93,37 +88,37 @@
                             <div class="row mb-2">
                                 <label for="productName" class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Product name" aria-label="Product name" id="productName" name="productName">
+                                    <input type="text" class="form-control" placeholder="Product name" aria-label="Product name" id="productName" name="productName" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="categoryId" class="col-sm-3 col-form-label">Category id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Category id" aria-label="Category id" id="categoryId" name="categoryId">
+                                    <input type="number" class="form-control" placeholder="Category id" aria-label="Category id" id="categoryId" name="categoryId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="sectionId" class="col-sm-3 col-form-label">Section id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Section id" aria-label="Section id" id="sectionId" name="sectionId">
+                                    <input type="number" class="form-control" placeholder="Section id" aria-label="Section id" id="sectionId" name="sectionId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="brandId" class="col-sm-3 col-form-label">Brand id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Brand id" aria-label="Brand id" id="brandId" name="brandId">
+                                    <input type="number" class="form-control" placeholder="Brand id" aria-label="Brand id" id="brandId" name="brandId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="price" class="col-sm-3 col-form-label">Price</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Price" aria-label="Price" id="price" name="price">
+                                    <input type="text" class="form-control" placeholder="Price" aria-label="Price" id="price" name="price" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Quantity" aria-label="Quantity" id="quantity" name="quantity">
+                                    <input type="number" class="form-control" placeholder="Quantity" aria-label="Quantity" id="quantity" name="quantity" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -155,43 +150,43 @@
                             <div class="row mb-2">
                                 <label for="productIdUpd" class="col-sm-3 col-form-label">id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Product id" aria-label="Product id" id="productIdUpd" name="productId">
+                                    <input type="number" class="form-control" placeholder="Product id" aria-label="Product id" id="productIdUpd" name="productId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="productName" class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Product name" aria-label="Product name" id="productNameUpd" name="productName">
+                                    <input type="text" class="form-control" placeholder="Product name" aria-label="Product name" id="productNameUpd" name="productName" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="categoryId" class="col-sm-3 col-form-label">Category id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Category id" aria-label="Category id" id="categoryIdUpd" name="categoryId">
+                                    <input type="number" class="form-control" placeholder="Category id" aria-label="Category id" id="categoryIdUpd" name="categoryId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="sectionId" class="col-sm-3 col-form-label">Section id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Section id" aria-label="Section id" id="sectionIdUpd" name="sectionId">
+                                    <input type="number" class="form-control" placeholder="Section id" aria-label="Section id" id="sectionIdUpd" name="sectionId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="brandId" class="col-sm-3 col-form-label">Brand id</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Brand id" aria-label="Brand id" id="brandIdUpd" name="brandId">
+                                    <input type="number" class="form-control" placeholder="Brand id" aria-label="Brand id" id="brandIdUpd" name="brandId" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="price" class="col-sm-3 col-form-label">Price</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Price" aria-label="Price" id="priceUpd" name="price">
+                                    <input type="text" class="form-control" placeholder="Price" aria-label="Price" id="priceUpd" name="price" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Quantity" aria-label="Quantity" id="quantityUpd" name="quantity">
+                                    <input type="number" class="form-control" placeholder="Quantity" aria-label="Quantity" id="quantityUpd" name="quantity" required>
                                 </div>
                             </div>
                             <div class="row mb-2">

@@ -2,20 +2,20 @@ package com.epam.projects.kidsshop.service;
 
 import com.epam.projects.kidsshop.dao.UpdateProductDao;
 import com.epam.projects.kidsshop.entity.Product;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.text.ParseException;
 
 public class UpdateProductService implements Service {
+
+    private final UpdateProductDao productDao = new UpdateProductDao();
+
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
-        UpdateProductDao productDao = new UpdateProductDao();
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Product product = new Product();
         product.setId(Integer.parseInt(request.getParameter("productId")));
         product.setName(request.getParameter("productName"));

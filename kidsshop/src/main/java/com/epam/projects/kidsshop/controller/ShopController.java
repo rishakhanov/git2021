@@ -2,8 +2,6 @@ package com.epam.projects.kidsshop.controller;
 
 import com.epam.projects.kidsshop.service.Service;
 import com.epam.projects.kidsshop.service.factory.ServiceFactory;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -33,18 +33,17 @@
     <br><br><br><br>
     <div>
         <img src="http://localhost:8080/uploaded_files/bear.jpg">
-        <button class="btn btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalBugatti">Order (id=7)</button>
+        <button class="btn btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalBugatti"  onclick="submitFunction(7)">Bear, $10</button>
     </div>
     </div>
         <img src="http://localhost:8080/uploaded_files/olafcartoon.jpg">
-        <button class="btn btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalBugatti">Order (id=8)</button>
+        <button class="btn btn-outline-primary ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalBugatti"  onclick="submitFunction(8)">Olaf, $15</button>
     </div>
 
     <footer class="pt-1 my-md-1 pt-md-1 border-top">
         <div class="row">
             <div class="mx-auto" style="width: 200px">
                 <h5>KidsToys</h5>
-                ${user}
             </div>
         </div>
     </footer>
@@ -60,24 +59,15 @@
                 <div class="modal-body">
                     <form method="post" action="buycar">
                         <div class="row mb-2">
-                            <label for="id" class="col-sm-3 col-form-label">id</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="id" aria-label="id" id="id" name="productId">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
                             <label for="Quantity" class="col-sm-3 col-form-label">Quantity</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Quantity" aria-label="Quantity" id="Quantity" name="quantity">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
-                            <div class="col-sm-9">
-                                <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+                                <input type="number" class="form-control" placeholder="Quantity" aria-label="Quantity" id="Quantity" name="quantity" required>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" id="carId"  name="carId" value=""/>
+                            <input type = "hidden" name="jspName" value="/stuffed-toys.jsp">
+                            <input type="hidden" name="userEmail" value=${user}>
                             <input type="submit" class="btn btn-secondary" value="Order"/>
                         </div>
                     </form>
@@ -86,7 +76,12 @@
         </div>
     </div>
 
+    <script>
+        function submitFunction(id) {
+            $(".modal-footer #carId").val(id);
+        }
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>
