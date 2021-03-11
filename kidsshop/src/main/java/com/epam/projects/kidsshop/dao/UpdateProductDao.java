@@ -1,6 +1,9 @@
 package com.epam.projects.kidsshop.dao;
 
 import com.epam.projects.kidsshop.entity.Product;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class UpdateProductDao {
@@ -8,6 +11,7 @@ public class UpdateProductDao {
     private final String SQL = "update product "
             + "set name=?, category_id=?, section_id=?, brand_id=?, price=?, quantity=?, details=? "
             + "where id=?";
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
     public void updateProduct(Product product) {
 
@@ -30,6 +34,7 @@ public class UpdateProductDao {
             }
         }catch (ClassNotFoundException | SQLException | ConnectionPoolException e) {
             e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 }

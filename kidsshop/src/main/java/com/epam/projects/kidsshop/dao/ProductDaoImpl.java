@@ -1,6 +1,8 @@
 package com.epam.projects.kidsshop.dao;
 
 import com.epam.projects.kidsshop.entity.Product;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,6 +18,7 @@ public class ProductDaoImpl {
             "left outer join category as c on p.category_id=c.id\n" +
             "left outer join section as s on p.section_id=s.id\n" +
             "left outer join brand as b on p.brand_id=b.id;";
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
     public List<Product> getProducts() {
 
@@ -45,6 +48,7 @@ public class ProductDaoImpl {
                 connectionPool.putback(con);
             }
         }catch (ClassNotFoundException | SQLException | ConnectionPoolException e) {
+            LOGGER.error(e);
             e.printStackTrace();
         }
         return products;

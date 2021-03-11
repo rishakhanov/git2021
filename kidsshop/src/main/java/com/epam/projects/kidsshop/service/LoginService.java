@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static com.sun.xml.internal.messaging.saaj.packaging.mime.util.ASCIIUtility.getBytes;
+
 public class LoginService implements Service {
 
     private final LoginUserDao loginDao = new LoginUserDao();
@@ -19,6 +21,14 @@ public class LoginService implements Service {
 
         String userLoginEmail = request.getParameter("userEmail");
         String userLoginPassword = request.getParameter("inputLoginPassword");
+        byte[] passBytes = getBytes(userLoginPassword);
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < passBytes.length; i++) {
+            sb.append(passBytes[i]);
+        }
+
+        userLoginPassword = sb.toString();
         UserLoginBean loginBean = new UserLoginBean();
         loginBean.setUserEmail(userLoginEmail);
         loginBean.setUserLoginPassword(userLoginPassword);

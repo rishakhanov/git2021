@@ -1,11 +1,15 @@
 package com.epam.projects.kidsshop.dao;
 
 import com.epam.projects.kidsshop.entity.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class OrderTempDao {
 
     private final String SQL = "insert into orderdetail(user_id, order_date, status, details) values (?, ?, ?, ?)";
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
     public void addTempOrder(Order order) {
 
@@ -23,6 +27,7 @@ public class OrderTempDao {
                 connectionPool.putback(con);
             }
         }catch (ClassNotFoundException | SQLException | ConnectionPoolException e) {
+            LOGGER.error(e);
             e.printStackTrace();
         }
     }

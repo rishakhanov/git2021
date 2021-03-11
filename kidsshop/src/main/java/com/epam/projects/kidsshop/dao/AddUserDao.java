@@ -1,12 +1,15 @@
 package com.epam.projects.kidsshop.dao;
 
 import com.epam.projects.kidsshop.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
 public class AddUserDao {
 
     private final String SQL = "insert into userDetail(first_name, last_name, birthday, iin, phone, email, address, password_details, is_admin) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
     public void addUser(User user) {
 
@@ -29,6 +32,7 @@ public class AddUserDao {
                 connectionPool.putback(con);
             }
         }catch (ClassNotFoundException | SQLException | ConnectionPoolException e) {
+            LOGGER.error(e);
             e.printStackTrace();
         }
     }

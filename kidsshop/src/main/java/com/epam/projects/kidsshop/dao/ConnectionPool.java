@@ -1,5 +1,8 @@
 package com.epam.projects.kidsshop.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.Locale;
 import java.util.Map;
@@ -17,6 +20,7 @@ public class ConnectionPool {
     private String password;
     private int poolSize;
     private static boolean existConnectionQueue = false;
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
     private ConnectionPool() {
         DBResourceManager dbResourceManager = DBResourceManager.getInstance();
@@ -27,6 +31,7 @@ public class ConnectionPool {
         try {
             this.poolSize = Integer.parseInt(dbResourceManager.getValue(DBParameter.DB_POLL_SIZE));
         } catch (NumberFormatException e) {
+            LOGGER.error(e);
             poolSize = 10;
         }
     }
@@ -60,10 +65,9 @@ public class ConnectionPool {
                 connectionQueue.add(pooledConnection);
             }
             existConnectionQueue = true;
-        } catch (SQLException e) {
-            throw new ConnectionPoolException("SQLException in ConnectionPool", e);
-        } catch (ClassNotFoundException e) {
-            throw new ConnectionPoolException("Can't find database driver class", e);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error(e);
+            e.printStackTrace();
         }
     }
 
@@ -72,7 +76,8 @@ public class ConnectionPool {
         try {
             connection = connectionQueue.take();
         } catch (InterruptedException e) {
-            throw new ConnectionPoolException("Error connecting to the data source.", e);
+            LOGGER.error(e);
+            e.printStackTrace();
         }
         return connection;
     }

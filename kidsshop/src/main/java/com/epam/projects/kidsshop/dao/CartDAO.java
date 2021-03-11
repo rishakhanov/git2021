@@ -1,6 +1,8 @@
 package com.epam.projects.kidsshop.dao;
 
 import com.epam.projects.kidsshop.entity.Cart;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -15,6 +17,8 @@ public class CartDAO {
     private final String SQL = "select od.id, oi.id, od.user_id, od.order_date, p.name, oi.quantity, p.price, oi.total_cost, od.status from orderitem as oi\n" +
             "left outer join product as p on p.id=oi.product_id\n" +
             "left outer join orderdetail as od on od.id=oi.order_id;";
+
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
     double moneyValue;
     String item;
@@ -52,6 +56,7 @@ public class CartDAO {
                 connectionPool.putback(con);
             }
         }catch (ClassNotFoundException | SQLException | ConnectionPoolException e) {
+            LOGGER.error(e);
             e.printStackTrace();
         }
         return cart;
