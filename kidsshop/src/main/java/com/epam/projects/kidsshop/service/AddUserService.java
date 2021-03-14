@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import static com.sun.xml.internal.messaging.saaj.packaging.mime.util.ASCIIUtility.getBytes;
+
 public class AddUserService implements Service{
     private final AddUserDao userDao = new AddUserDao();
 
@@ -22,7 +24,17 @@ public class AddUserService implements Service{
         user.setPhone(Long.parseLong(request.getParameter("inputPhone")));
         user.setEmail(request.getParameter("inputEmail"));
         user.setAddress(request.getParameter("inputAddress"));
-        user.setPassword(request.getParameter("inputPassword"));
+
+        String userLoginPassword = request.getParameter("inputPassword");
+        byte[] passBytes = getBytes(userLoginPassword);
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < passBytes.length; i++) {
+            sb.append(passBytes[i]);
+        }
+
+        userLoginPassword = sb.toString();
+        user.setPassword(userLoginPassword);
         user.setAdminPermission(false);
         userDao.addUser(user);
         String inputEmail = request.getParameter("inputEmail");
